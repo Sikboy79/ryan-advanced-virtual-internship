@@ -155,6 +155,22 @@ button:disabled {
   cursor: pointer;
 }
 
+/* LOGIN MODAL */
+
+.nav__list--login {
+  cursor: pointer;
+}
+
+/* .auth__content {
+  box-sizing: border-box;
+  height: 70vh;
+}
+
+.auth__title {
+  display: flex;
+  align-items: center;
+} */
+
 /* LANDING */
 .landing__wrapper {
   display: flex;

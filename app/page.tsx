@@ -1,9 +1,11 @@
-import Home from "../components/Home"
+"use client";
+
+import Home from "../components/Home";
 
 export default function Page() {
   return (
     <>
-    <Home/>
+      <Home />
     </>
   );
 }
