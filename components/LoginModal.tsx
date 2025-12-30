@@ -81,7 +81,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
 
   const handleForgotPassword = async () => {
     if (!email) {
-      // setError("Please enter your email to reset password");
+      setError("Please enter your email to reset password");
       return;
     }
 
@@ -98,7 +98,7 @@ export default function LoginModal({ isOpen, onClose }: Props) {
 
   return (
     <div className="auth fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="relative w-full max-w-md bg-white rounded-xl shadow-xl flex flex-col justify-between h-[480px]">
+      <div className="relative w-full max-w-md bg-white rounded-xl shadow-xl flex flex-col justify-between h-[500px]">
         <div className="p-6 flex flex-col items-center justify-between h-full">
           <button
             onClick={onClose}
