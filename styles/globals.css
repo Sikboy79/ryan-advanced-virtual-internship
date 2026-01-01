@@ -165,7 +165,7 @@ button:disabled {
 }
 
 .color-animate {
-  animation: colorChange 32s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite; 
   animation-delay: 0s;
   font-size: 32px;
   font-weight: 500;
@@ -174,7 +174,7 @@ button:disabled {
 }
 
 .color-animate-1 {
-  animation: colorChange 32s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite; 
   animation-delay: 3s; 
   font-size: 32px;
   font-weight: 500;
@@ -183,7 +183,7 @@ button:disabled {
 }
 
 .color-animate-2 {
-  animation: colorChange 32s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite; 
   animation-delay: 6s;
   font-size: 32px;
   font-weight: 500;
@@ -192,7 +192,7 @@ button:disabled {
 }
 
 .color-animate-3 {
-  animation: colorChange 32s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite; 
   animation-delay: 9s;
   font-size: 32px;
   font-weight: 500;
@@ -201,7 +201,7 @@ button:disabled {
 }
 
 .color-animate-4 {
-  animation: colorChange 32s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite; 
   animation-delay: 12s;
   font-size: 32px;
   font-weight: 500;
@@ -210,7 +210,7 @@ button:disabled {
 }
 
 .color-animate-5 {
-  animation: colorChange 32s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite; 
   animation-delay: 15s;
   font-size: 32px;
   font-weight: 500;

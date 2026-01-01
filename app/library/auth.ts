@@ -12,10 +12,16 @@ import { getAuth, signInAnonymously, sendPasswordResetEmail} from "firebase/auth
 
 const googleProvider = new GoogleAuthProvider();
 
+
 export const loginWithGuest = async () => {
   const auth = getAuth();
   return await signInAnonymously(auth);
 };
+
+export const logoutUser = async () => {
+  await signOut(auth);
+};
+
 export const loginWithEmail = (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
 

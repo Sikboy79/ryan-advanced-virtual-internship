@@ -224,18 +224,36 @@ export default function Home() {
                 </div>
               </div>
               <div className="statistics__content--header statistics__content--header-second">
-                <div className="statistics__heading">Expand your learning</div>
-                <div className="statistics__heading">Accomplish your goals</div>
-                <div className="statistics__heading">
-                  Strengthen your vitality
-                </div>
-                <div className="statistics__heading">
-                  Become a better caregiver
-                </div>
-                <div className="statistics__heading">Improve your mood</div>
-                <div className="statistics__heading">
-                  Maximize your abilities
-                </div>
+                <FadeColorItem delay="10">
+                  <div className="color-animate">
+                    Expand your learning
+                  </div>
+                </FadeColorItem>
+                <FadeColorItem delay="20">
+                  <div className="color-animate-1">
+                    Accomplish your goals
+                  </div>
+                </FadeColorItem>
+                <FadeColorItem delay="30">
+                  <div className="color-animate-2">
+                    Strengthen your vitality
+                  </div>
+                </FadeColorItem>
+                <FadeColorItem delay="40">
+                  <div className="color-animate-3">
+                     Become a better caregiver
+                  </div>
+                </FadeColorItem>
+                <FadeColorItem delay="50">
+                  <div className="color-animate-4">
+                    Improve your mood
+                  </div>
+                </FadeColorItem>
+                <FadeColorItem delay="60">
+                  <div className="color-animate-5">
+                    Maximize your abilities
+                  </div>
+                </FadeColorItem>
               </div>
             </div>
           </div>
@@ -246,7 +264,7 @@ export default function Home() {
           <div className="container">
             <div className="section__title">What our members say</div>
             <div className="reviews__wrapper">
-              <FadeInItem delay="100">
+              <FadeInItem delay="0">
                 <div className="review">
                   <div className="review__header">
                     <div className="review__name">Hanna M.</div>
