@@ -1,4 +1,5 @@
 "use client";
+
 import DashboardLayout from "../app/for-you/ForYouLayout";
 import SearchInput from "./UI/SearchInput";
 import { useState } from "react";

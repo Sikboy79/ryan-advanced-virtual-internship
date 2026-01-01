@@ -30,7 +30,7 @@ function Sidebar({ setIsLoginOpen }: SidebarProps) {
     router.push("/");
   };
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-[#f7fbf9] border-r border-gray-200 flex flex-col">
+    <aside className="fixed left-0 top-0 h-screen w-52 bg-[#f7fbf9] border-r border-gray-200 flex flex-col">
       <div className="flex items-center gap-3 px-6 py-5">
         <img
           className="nav__img"
