@@ -156,6 +156,67 @@ button:disabled {
   cursor: pointer;
 }
 
+/* ANIMATIONS */
+
+@keyframes colorChange {
+  0% { color: grey; }
+  50% { color: rgb(91, 238, 91); }
+  100% { color: grey; }
+}
+
+.color-animate {
+  animation: colorChange 28s ease-in-out infinite; 
+  animation-delay: 0s;
+  font-size: 32px;
+  font-weight: 500;
+  color: #6b757b;
+  margin-bottom: 16px;
+}
+
+.color-animate-1 {
+  animation: colorChange 28s ease-in-out infinite; 
+  animation-delay: 3s; 
+  font-size: 32px;
+  font-weight: 500;
+  color: #6b757b;
+  margin-bottom: 16px;
+}
+
+.color-animate-2 {
+  animation: colorChange 28s ease-in-out infinite; 
+  animation-delay: 6s;
+  font-size: 32px;
+  font-weight: 500;
+  color: #6b757b;
+  margin-bottom: 16px;
+}
+
+.color-animate-3 {
+  animation: colorChange 28s ease-in-out infinite; 
+  animation-delay: 9s;
+  font-size: 32px;
+  font-weight: 500;
+  color: #6b757b;
+  margin-bottom: 16px;
+}
+
+.color-animate-4 {
+  animation: colorChange 28s ease-in-out infinite; 
+  animation-delay: 12s;
+  font-size: 32px;
+  font-weight: 500;
+  color: #6b757b;
+  margin-bottom: 16px;
+}
+
+.color-animate-5 {
+  animation: colorChange 28s ease-in-out infinite; 
+  animation-delay: 15s;
+  font-size: 32px;
+  font-weight: 500;
+  color: #6b757b;
+  margin-bottom: 16px;
+}
 
 /* LANDING */
 .landing__wrapper {

@@ -115,9 +115,20 @@ export default function LoginModal({ isOpen, onClose }: Props) {
             <>
               <button
                 onClick={handleGuestLogin}
-                className="w-full rounded-lg bg-[#3A579D] px-4 py-2 text-white font-medium shadow hover:bg-gray-400 transition mt-2"
+                className="w-full flex items-center gap-3 rounded-lg bg-[#3A579D] px-4 py-2 text-white font-medium shadow hover:bg-[#0f2d75] transition mt-2"
               >
-                Login as Guest
+                <span className="flex h-8 w-8 items-center justify-center rounded bg-[#3A579D]">
+                  <svg
+                    viewBox="2.5 0 20 20"
+                    fill="currentColor"
+                    className="h-5 w-5 text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5Zm0 2c-3.3 0-10 1.7-10 5v1h20v-1c0-3.3-6.7-5-10-5Z" />
+                  </svg>
+                </span>
+                <span className="flex-1 text-center">Login as Guest</span>
+                <span className="h-9 w-9" />
               </button>
 
               <div className="w-full flex items-center gap-3 my-2">
