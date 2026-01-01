@@ -1,47 +1,82 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { FaPause, FaPlay } from "react-icons/fa";
+import { useEffect, useRef, useState } from "react";
+import { FaPlay, FaPause } from "react-icons/fa";
 
-interface Props {
-  src: string;
-  duration?: string;
-}
+export default function AudioPlayer({ src }: { src: string }) {
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-export default function AudioPlayButton({ src, duration }: Props) {
-  const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const onLoadedMetadata = () => {
+      setDuration(audio.duration);
+    };
+
+    const onTimeUpdate = () => {
+      setCurrentTime(audio.currentTime);
+    };
+
+    audio.addEventListener("loadedmetadata", onLoadedMetadata);
+    audio.addEventListener("timeupdate", onTimeUpdate);
+
+    return () => {
+      audio.removeEventListener("loadedmetadata", onLoadedMetadata);
+      audio.removeEventListener("timeupdate", onTimeUpdate);
+    };
+  }, []);
 
   const togglePlay = () => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
     if (isPlaying) {
-      audioRef.current.pause();
+      audio.pause();
     } else {
-      audioRef.current.play();
+      audio.play();
     }
 
     setIsPlaying(!isPlaying);
   };
 
+  const formatTime = (time: number) => {
+    if (isNaN(time)) return "0 seconds";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60)
+    if (minutes === 0) {
+    return `${seconds} second${seconds !== 1 ? "s" : ""}`;
+  }
+
+  return `${minutes} minute${minutes !== 1 ? "s" : ""} ${seconds
+    .toString()
+    .padStart(2, "0")} second${seconds !== 1 ? "s" : ""}`;
+};
+
   return (
     <div className="flex items-center gap-3">
       <button
         onClick={togglePlay}
-        className="w-10 h-10 rounded-full bg-black flex items-center justify-center hover:scale-105 transition"
+        className="h-10 w-10 flex items-center justify-center rounded-full bg-black"
       >
         {isPlaying ? (
-          <FaPause className="text-white text-xl" />
+          <FaPause className="text-white" />
         ) : (
-          <FaPlay className="text-white text-xl ml-1" />
+          <FaPlay className="text-white ml-[2px]" />
         )}
       </button>
 
-      <span className="text-sm text-gray-800 font-medium">
-        {duration ?? "3 mins"}
+      <span className="text-sm text-gray-700">
+        {formatTime(currentTime)}
       </span>
 
-      <audio ref={audioRef} src={src} />
+      <audio ref={audioRef} src={src} preload="metadata" />
     </div>
   );
 }
+
+

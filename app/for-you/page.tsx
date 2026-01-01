@@ -2,6 +2,8 @@ import ClientDashboardLayout from "@/components/Layout/ClientDashboardLayout";
 import AudioPlayButton from "@/components/UI/AudioPlayButton";
 import SearchInput from "@/components/UI/SearchInput";
 import axios from "axios";
+import { FadeInItem, FadeUpSlowItem } from "../../components/UI/Animations";
+import RecommendedBooks from "./RecommendedBooks";
 
 interface Book {
   id: string;
@@ -41,39 +43,43 @@ export default async function ForYou() {
         ) : (
           <div className="space-y-4">
             {selectedBooks.map((book) => (
-              <div
-                key={book.id}
-                className="flex gap-4 bg-[#FFF4E0] p-4 m-1 rounded-lg shadow max-w-[70%]"
-                style={{ marginLeft: 0 }}
-              >
-                <div className="flex-1 text-gray-700">
-                  <p className="text-base">{book.subTitle}</p>
-                </div>
-                <span className="w-px h-32 bg-gray-300 self-center" />
-                <div className="flex-shrink-0 h-28">
-                  <img
-                    src={book.imageLink}
-                    alt={book.title}
-                    className=" h-32 m-3 object-cover rounded-md"
-                  />
-                </div>
-                <div className="flex-1 flex flex-col m-3 gap-3">
-                  <h3 className="font-bold text-lg text-gray-700">
-                    {book.title}
-                  </h3>
-                  <p className="text-sm text-gray-700">{book.author}</p>
-                  {book.audioLink && (
-                    <AudioPlayButton
-                      src={book.audioLink}
-                      duration="3 mins 23 secs"
+              <FadeInItem key="id">
+                <div
+                  key={book.id}
+                  className="flex gap-4 bg-[#FFF4E0] p-4 m-1 rounded-lg shadow max-w-[70%]"
+                  style={{ marginLeft: 0 }}
+                >
+                  <div className="flex-1 text-gray-700">
+                    <p className="text-base">{book.subTitle}</p>
+                  </div>
+                  <span className="w-px h-32 bg-gray-300 self-center" />
+                  <div className="flex-shrink-0 h-28">
+                    <FadeUpSlowItem>
+                    <img
+                      src={book.imageLink}
+                      alt={book.title}
+                      className=" h-32 m-3 object-cover rounded-md"
                     />
-                  )}
+                    </FadeUpSlowItem>
+                  </div>
+                  <div className="flex-1 flex flex-col m-3 gap-3">
+                    <h3 className="font-bold text-lg text-gray-700">
+                      {book.title}
+                    </h3>
+                    <p className="text-sm text-gray-700">{book.author}</p>
+                    {book.audioLink && (
+                      <AudioPlayButton
+                        src={book.audioLink}
+                      />
+                    )}
+                  </div>
                 </div>
-              </div>
+              </FadeInItem>
             ))}
           </div>
         )}
       </section>
+      <RecommendedBooks/>
     </ClientDashboardLayout>
   );
 }
