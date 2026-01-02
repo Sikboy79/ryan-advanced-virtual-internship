@@ -30,15 +30,15 @@ function Sidebar({ setIsLoginOpen }: SidebarProps) {
     router.push("/");
   };
   return (
-    <aside className="fixed left-0 top-0 h-screen w-52 bg-[#f7fbf9] border-r border-gray-200 flex flex-col">
-      <div className="flex items-center gap-3 px-6 py-5">
+    <aside className="fixed left-0 top-0 h-screen w-48 bg-[#f7fbf9] border-r border-gray-200 flex flex-col text-gray-600">
+      <div className="flex items-center px-4 py-5">
         <img
           className="nav__img"
           src="https://summarist.vercel.app/_next/static/media/logo.1b1c490b.png"
           alt="logo"
         />
       </div>
-      <nav className="flex-1 px-4 space-y-1">
+      <nav className="flex-1">
         <NavItem href="/for-you" icon={<FiHome />} label="For you" />
         <NavItem href="/my-library" icon={<FiBookmark />} label="My Library" />
         <NavItem href="/highlights" icon={<FiEdit />} label="Highlights" />

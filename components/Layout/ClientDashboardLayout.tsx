@@ -14,9 +14,9 @@ export default function ClientDashboardLayout({
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen ">
       <Sidebar setIsLoginOpen={setIsLoginOpen} />
-      <main className="ml-64 flex-1 p-8 bg-white">{children}</main>
+      <main className="ml-48 flex-1 p-8 bg-white">{children}</main>
       {isLoginOpen && (
         <LoginModal
           isOpen={isLoginOpen}
