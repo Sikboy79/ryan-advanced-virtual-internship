@@ -1,4 +1,5 @@
 "use client";
+
 import DashboardLayout from "../app/for-you/ForYouLayout";
 import SearchInput from "./UI/SearchInput";
 import { useState } from "react";
@@ -18,6 +19,8 @@ export default function ForYou() {
       <div className="">
         <DashboardLayout setIsLoginOpen={setIsLoginOpen} />
       </div>
+      <>
+      </>
     </>
   );
 }

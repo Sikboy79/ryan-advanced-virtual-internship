@@ -1,16 +1,25 @@
-"use client"
+"use client";
 
-import React from "react";
 import DashboardLayout from "../app/for-you/ForYouLayout";
 import { useState } from "react";
+import SearchInput from "./UI/SearchInput";
 
 export default function Highlights() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   return (
-    <div>
+    <>
+      <div id="__next">
+        <div className="search__input--wrapper flex justify-end m-1">
+          <SearchInput />
+        </div>
+        <div className="sidebar__toggle--btn">
+          <svg></svg>
+        </div>
+      </div>
       <div className="">
         <DashboardLayout setIsLoginOpen={setIsLoginOpen} />
       </div>
-    </div>
+      <div>Highlights</div>
+    </>
   );
-};
+}

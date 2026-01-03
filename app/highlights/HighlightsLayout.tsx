@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import LoginModal from "@/components/LoginModal";
 import Sidebar from "@/components/UI/Sidebar";

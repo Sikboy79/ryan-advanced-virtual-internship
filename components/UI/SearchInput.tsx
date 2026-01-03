@@ -7,7 +7,7 @@ export default function SearchInput() {
   const { query, setQuery } = useSearchStore();
 
   return (
-    <form action="/search" className="relative w-full max-w-md">
+    <form action="/search" className="relative max-w-md mt-4 mr-4">
       <input
         name="q"
         type="text"
