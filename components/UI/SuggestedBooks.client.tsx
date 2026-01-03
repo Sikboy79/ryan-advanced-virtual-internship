@@ -6,7 +6,8 @@ import { useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
 import { FadeInItem } from "./Animations";
 
-export default function RecommendedBooksClient({ books }: { books: any[] }) {
+
+export default function SuggestedBooksClient({ books }: { books: any[] }) {
   const VISIBLE = 5;
   const [index, setIndex] = useState(0);
 
@@ -17,31 +18,26 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
 
   return (
     <section className="mb-10 ">
-      <h2 className="text-2xl font-bold mb-1">Recommended For You</h2>
-      <p className="text-gray-500 mb-6">We think you’ll like these</p>
+      <h2 className="text-2xl font-bold mb-1">Suggested Books</h2>
+      <p className="text-gray-500 mb-6">Browse these books</p>
 
       <div className="relative overflow-hidden">
-        {/* LEFT BUTTON */}
         {index > 0 && (
           <button
             onClick={prev}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-20 bg-slate-400 shadow rounded-full p-2"
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-slate-400 shadow rounded-full p-2"
           >
             <FiChevronLeft size={20} />
           </button>
         )}
-
-        {/* RIGHT BUTTON */}
         {index < maxIndex && (
           <button
             onClick={next}
-            className="absolute right-0 top-1/2 -translate-y-1/2 z-20 bg-slate-400 shadow rounded-full p-2"
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-slate-400 shadow rounded-full p-2"
           >
             <FiChevronRight size={20} />
           </button>
         )}
-
-        {/* TRACK */}
         <FadeInItem>
           <div
             className="flex transition-transform duration-500 ease-out"
@@ -62,13 +58,10 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
                   <h3 className="mt-3 text-sm font-semibold line-clamp-2">
                     {book.title}
                   </h3>
-                  <p className="text-xs text-gray-500">{book.author}</p>
+                  <p className="text-xs text-gray-500 mt-2">{book.author}</p>
                   <p className="text-xs text-gray-800 mt-2">{book.subTitle}</p>
                   <div className="">
-                    <p className="flex gap-2 text-gray-400 mt-2">
-                      <FiStar />
-                      {book.averageRating}
-                    </p>
+                    <p className="flex gap-2 text-gray-400 mt-2"><FiStar/>{book.averageRating}</p>
                   </div>
                 </Link>
               </div>

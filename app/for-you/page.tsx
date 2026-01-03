@@ -4,6 +4,7 @@ import SearchInput from "@/components/UI/SearchInput";
 import axios from "axios";
 import { FadeInItem, FadeUpSlowItem } from "../../components/UI/Animations";
 import RecommendedBooks from "../../components/UI/RecommendedBooks";
+import SuggestedBooks from "@/components/UI/SuggestedBooks";
 
 interface Book {
   id: string;
@@ -47,7 +48,7 @@ export default async function ForYou() {
                 <FadeInItem key="id">
                   <div
                     key={book.id}
-                    className="flex gap-4 bg-[#FFF4E0] p-4 m-1 rounded-lg shadow max-w-[60%]"
+                    className="flex gap-4 bg-[#FFF4E0] p-4 m-1 rounded-lg shadow "
                     style={{ marginLeft: 0 }}
                   >
                     <div className="flex-1 text-gray-700">
@@ -78,9 +79,8 @@ export default async function ForYou() {
             </div>
           )}
         </section>
-        <div className="max-w-[80%] ">
           <RecommendedBooks />
-        </div>
+          <SuggestedBooks />
       </ClientDashboardLayout>
     </>
   );
