@@ -17,7 +17,7 @@ export default function ForYou() {
         </div>
       </div>
       <div className="">
-        <DashboardLayout setIsLoginOpen={setIsLoginOpen} />
+        <DashboardLayout isLoginOpen={setIsLoginOpen} />
       </div>
       <>
       </>
