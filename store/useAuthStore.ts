@@ -20,7 +20,6 @@ type AuthState = {
   loading: true | false;
   setUser: (user: User | null) => void;
   clearUser: () => void;
-  
 };
 
 export const useAuthStore = create<AuthState>((set) => ({

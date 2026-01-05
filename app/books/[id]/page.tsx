@@ -1,6 +1,6 @@
-import { FiStar, FiClock, FiMic } from "react-icons/fi";
 import BookPageClient from "./BookPageClient";
 export const runtime = "nodejs";
+
 
 async function getBook(id: string) {
   const res = await fetch(
@@ -37,8 +37,6 @@ export default async function BookPage({
   const { id } = await params;
 
   const book = await getBook(id);
-
-  console.log(getBook(id));
 
   return (
     <BookPageClient book={book} />
