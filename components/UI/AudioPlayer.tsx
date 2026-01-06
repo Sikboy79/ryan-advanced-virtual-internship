@@ -14,31 +14,30 @@ export interface AudioPlayerHandle {
   pause: () => void;
 }
 
-const AudioPlayer = forwardRef<
-  AudioPlayerHandle,
-  { src: string }
->(({ src }, ref) => {
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+const AudioPlayer = forwardRef<AudioPlayerHandle, { src: string }>(
+  ({ src }, ref) => {
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
 
-  useImperativeHandle(ref, () => ({
-    toggle() {
-      if (!audioRef.current) return;
-      isPlaying ? audioRef.current.pause() : audioRef.current.play();
-      setIsPlaying(!isPlaying);
-    },
-    play() {
-      audioRef.current?.play();
-      setIsPlaying(true);
-    },
-    pause() {
-      audioRef.current?.pause();
-      setIsPlaying(false);
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      toggle() {
+        if (!audioRef.current) return;
+        isPlaying ? audioRef.current.pause() : audioRef.current.play();
+        setIsPlaying(!isPlaying);
+      },
+      play() {
+        audioRef.current?.play();
+        setIsPlaying(true);
+      },
+      pause() {
+        audioRef.current?.pause();
+        setIsPlaying(false);
+      },
+    }));
 
-  return <audio ref={audioRef} src={src} preload="metadata" />;
-});
+    return <audio ref={audioRef} src={src} preload="metadata" />;
+  }
+);
 
 AudioPlayer.displayName = "AudioPlayer";
 export default AudioPlayer;

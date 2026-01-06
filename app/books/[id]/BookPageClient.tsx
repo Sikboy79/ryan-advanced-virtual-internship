@@ -88,6 +88,9 @@ export default function BookPageClient({ book }: { book: any }) {
                 author: book.author,
                 imageLink: book.imageLink,
                 summary: book.summary,
+                subTitle: book.subTitle,
+                averageRating: book.averageRating,
+                totalRating: book.totalRating
               })
             }
             className="border flex items-center gap-2 text-blue-600 font-bold mt-4"

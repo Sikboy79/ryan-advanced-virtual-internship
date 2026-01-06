@@ -6,13 +6,10 @@ import { useState } from "react";
 import { FiChevronLeft, FiChevronRight, FiStar } from "react-icons/fi";
 import { FadeInItem } from "./Animations";
 
-
 export default function SuggestedBooksClient({ books }: { books: any[] }) {
   const VISIBLE = 5;
   const [index, setIndex] = useState(0);
-
   const maxIndex = Math.max(0, books.length - VISIBLE);
-
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
 
@@ -20,7 +17,6 @@ export default function SuggestedBooksClient({ books }: { books: any[] }) {
     <section className="mb-10 ">
       <h2 className="text-2xl font-bold mb-1">Suggested Books</h2>
       <p className="text-gray-500 mb-6">Browse these books</p>
-
       <div className="relative overflow-hidden">
         {index > 0 && (
           <button
@@ -61,7 +57,10 @@ export default function SuggestedBooksClient({ books }: { books: any[] }) {
                   <p className="text-xs text-gray-500 mt-2">{book.author}</p>
                   <p className="text-xs text-gray-800 mt-2">{book.subTitle}</p>
                   <div className="">
-                    <p className="flex gap-2 text-gray-400 mt-2"><FiStar/>{book.averageRating}</p>
+                    <p className="flex gap-2 text-gray-400 mt-2">
+                      <FiStar />
+                      {book.averageRating}
+                    </p>
                   </div>
                 </Link>
               </div>

@@ -3,9 +3,12 @@ import { create } from "zustand";
 export interface Book {
   id: string;
   title: string;
+  subTitle: string;
   author: string;
   imageLink: string;
   summary: string;
+  averageRating: string;
+  totalRating: string;
 }
 
 interface LibraryState {
