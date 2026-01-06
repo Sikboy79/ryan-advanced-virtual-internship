@@ -56,13 +56,11 @@ export default async function ForYou() {
                     </div>
                     <span className="w-px h-32 bg-gray-300 self-center" />
                     <div className="flex-shrink-0 h-28">
-                      <FadeUpSlowItem>
-                        <img
-                          src={book.imageLink}
-                          alt={book.title}
-                          className=" h-32 m-3 object-cover rounded-md"
-                        />
-                      </FadeUpSlowItem>
+                      <img
+                        src={book.imageLink}
+                        alt={book.title}
+                        className=" h-32 m-3 object-cover rounded-md"
+                      />
                     </div>
                     <div className="flex-1 flex flex-col m-3 gap-3">
                       <h3 className="font-bold text-lg text-gray-700">
@@ -79,8 +77,8 @@ export default async function ForYou() {
             </div>
           )}
         </section>
-          <RecommendedBooks />
-          <SuggestedBooks />
+        <RecommendedBooks />
+        <SuggestedBooks />
       </ClientDashboardLayout>
     </>
   );

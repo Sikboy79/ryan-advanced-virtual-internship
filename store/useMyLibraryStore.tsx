@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface Book {
   id: string;
@@ -17,20 +18,27 @@ interface LibraryState {
   isSaved: (id: string) => boolean;
 }
 
-export const useLibraryStore = create<LibraryState>((set, get) => ({
-  savedBooks: [],
+export const useLibraryStore = create<LibraryState>()(
+  persist(
+    (set, get) => ({
+      savedBooks: [],
 
-  toggleBook: (book) => {
-    const exists = get().savedBooks.some(b => b.id === book.id);
+      toggleBook: (book) => {
+        const exists = get().savedBooks.some(b => b.id === book.id);
 
-    set({
-      savedBooks: exists
-        ? get().savedBooks.filter(b => b.id !== book.id)
-        : [...get().savedBooks, book],
-    });
-  },
+        set({
+          savedBooks: exists
+            ? get().savedBooks.filter(b => b.id !== book.id)
+            : [...get().savedBooks, book],
+        });
+      },
 
-  isSaved: (id) => {
-    return get().savedBooks.some(b => b.id === id);
-  },
-}));
+      isSaved: (id) => {
+        return get().savedBooks.some(b => b.id === id);
+      },
+    }),
+    {
+      name: "library-storage", 
+    }
+  )
+);

@@ -2,34 +2,38 @@
 
 import { create } from "zustand";
 import { User } from "firebase/auth";
+import { persist } from "zustand/middleware";
 
-interface UserState {
+interface AuthState {
   user: User | null;
+  loading: boolean;
   setUser: (user: User | null) => void;
+  logout: () => void;
   clearUser: () => void;
 }
 
-export const useUserStore = create<UserState>((set) => ({
-  user: null,
-  setUser: (user) => set({ user }),
-  clearUser: () => set({ user: null }),
-}));
+export const useAuthStore = create<AuthState>()(
+  persist(
+    (set) => ({
+      user: null,
+      loading: true,
 
-type AuthState = {
-  user: User | null;
-  loading: true | false;
-  setUser: (user: User | null) => void;
-  clearUser: () => void;
-};
+      setUser: (user) =>
+        set({
+          user,
+          loading: false,
+        }),
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  loading: true,
-  setUser: (user) =>
-    set({
-      user,
-      loading: false,
+      logout: () =>
+        set({
+          user: null,
+          loading: false,
+        }),
+      clearUser: () => set({ user: null }),
     }),
-    clearUser: () => set({ user: null }),
-}));
 
+    {
+      name: "auth-storage",
+    }
+  )
+);

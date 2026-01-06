@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import LoginModal from "@/components/LoginModal";
-import { useUserStore } from "../store/useAuthStore";
+import { useAuthStore } from "../store/useAuthStore";
 import { onAuthChanged } from "../app/library/auth";
 import { AiFillAudio, AiFillBulb, AiFillFileText } from "react-icons/ai";
 import { BsStarFill, BsStarHalf } from "react-icons/bs";
@@ -17,8 +17,8 @@ import {
 
 export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
-  const user = useUserStore((state) => state.user);
-  const setUser = useUserStore((state) => state.setUser);
+  const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     const unsubscribe = onAuthChanged(setUser);

@@ -8,7 +8,7 @@ import {
   loginWithGuest,
   sendPasswordReset,
 } from "../app/library/auth";
-import { useUserStore } from "../store/useAuthStore";
+import { useAuthStore} from "../store/useAuthStore";
 import { useRouter } from "next/navigation";
 
 type Props = {
@@ -18,7 +18,7 @@ type Props = {
 
 export default function LoginModal({ isOpen, onClose }: Props) {
   const router = useRouter();
-  const setUser = useUserStore((state) => state.setUser);
+  const setUser = useAuthStore((state) => state.setUser);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isRegister, setIsRegister] = useState(false);
