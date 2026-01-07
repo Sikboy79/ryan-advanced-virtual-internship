@@ -27,7 +27,7 @@ export default function Home() {
 
   return (
     <>
-      <nav className="p-4 flex justify-between items-center bg-gray-100">
+      {/* <nav className="p-4 flex justify-between items-center bg-gray-100">
         <div>
           {user ? (
             <span>Welcome, {user.email}</span>
@@ -40,7 +40,7 @@ export default function Home() {
             </button>
           )}
         </div>
-      </nav>
+      </nav> */}
       <nav className="nav">
         <div className="nav__wrapper">
           <figure className="nav__img--mask">
@@ -76,7 +76,7 @@ export default function Home() {
                   </div>
                 </FadeInItem>
                 <FadeInItem>
-                  <FadeUpSlowItem>
+                  <FadeUpSlowItem className="z-1">
                     <div className="landing__content__subtitle">
                       Great summaries for busy people,
                       <br className="remove--tablet" />
@@ -87,7 +87,7 @@ export default function Home() {
                   </FadeUpSlowItem>
                 </FadeInItem>
                 <button
-                  className="btn home__cta--btn"
+                  className="btn home__cta--btn relative z-10"
                   onClick={() => setIsLoginOpen(true)}
                   style={{ cursor: "pointer" }}
                 >

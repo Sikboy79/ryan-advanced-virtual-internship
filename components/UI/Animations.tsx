@@ -60,13 +60,13 @@ export const FadeUpSlowItem = ({
 
 export const FadeUpFastItem = ({
   children,
-  delay = 800,
+  delay = 100,
 }: FadeColorItemProps) => {
   return (
     <div
-      data-aos="fade-up"
+      data-aos="fade-up-in"
       data-aos-delay={delay}
-      data-aos-duration="1200"
+      data-aos-duration="800"
       data-aos-easing="ease-in-sine"
       data-aos-once="false"
     >

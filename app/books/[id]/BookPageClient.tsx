@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiStar, FiClock, FiMic, FiBookOpen, FiBookmark } from "react-icons/fi";
 import { BsBookmarkFill } from "react-icons/bs";
 import SearchInput from "@/components/UI/SearchInput";
@@ -11,13 +11,42 @@ import { useRef } from "react";
 import AudioPlayer, { AudioPlayerHandle } from "@/components/UI/AudioPlayer";
 import SummaryModal from "@/components/SummaryModal";
 import { useLibraryStore } from "@/store/useMyLibraryStore";
+import { useSubscription } from "@/store/useSubscriptions";
+import SubscribeModal from "@/components/SubscribeModal";
 
 export default function BookPageClient({ book }: { book: any }) {
+  const [mounted, setMounted] = useState(false);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
   const audioRef = useRef<AudioPlayerHandle>(null);
   const [isReadOpen, setIsReadOpen] = useState(false);
   const { toggleBook, isSaved } = useLibraryStore();
   const saved = isSaved(book.id);
+  const { subscription, loading } = useSubscription();
+  const hasAccess = !!subscription;
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return <div className="h-screen bg-white" />;
+
+  const handleListen = () => {
+    if (!hasAccess) {
+      setIsSubscribeOpen(true); 
+    }
+
+    audioRef.current?.toggle();
+  };
+
+  const handleRead = () => {
+    if (!hasAccess) {
+      setIsSubscribeOpen(true); 
+      return;
+    }
+
+    setIsReadOpen(true);
+  };
 
   return (
     <>
@@ -55,18 +84,28 @@ export default function BookPageClient({ book }: { book: any }) {
               </div>
               <div className="flex gap-4 mb-2">
                 <button
-                  onClick={() => setIsReadOpen(true)}
-                  className="bg-[#0f2a44] text-white px-6 py-3 w-36 rounded-md font-normal flex justify-around items-center hover:opacity-80"
+                  onClick={handleRead}
+                  className={`bg-[#0f2a44] text-white px-6 py-3 w-36 rounded-md font-normal flex justify-around items-center hover:opacity-80
+                    ${
+                      !hasAccess
+                        ? "opacity-50"
+                        : "opacity-50"
+                    }`
+                }
                 >
                   <FiBookOpen />
-                  Read
+                  <span>{hasAccess ? "Read" : "Subscribe to read"}</span>
                 </button>
                 <button
-                  onClick={() => audioRef.current?.toggle()}
-                  className="bg-[#0f2a44] text-white px-6 py-3 w-36 rounded-md font-normal flex justify-around items-center hover:opacity-80"
+                  onClick={handleListen}
+                  className={`bg-[#0f2a44] text-white px-6 py-3 w-36 rounded-md font-normal flex justify-around items-center
+                         hover:opacity-80 ${
+                           !hasAccess ? "opacity-50" : ""
+                         }
+                        `}
                 >
                   <FiMic />
-                  Listen
+                  <span>{hasAccess ? "Listen" : "Subscribe to listen"}</span>
                 </button>
                 <AudioPlayer ref={audioRef} src={book.audioLink} />
               </div>
@@ -90,7 +129,7 @@ export default function BookPageClient({ book }: { book: any }) {
                 summary: book.summary,
                 subTitle: book.subTitle,
                 averageRating: book.averageRating,
-                totalRating: book.totalRating
+                totalRating: book.totalRating,
               })
             }
             className="border flex items-center gap-2 text-blue-600 font-bold mt-4"
@@ -122,6 +161,9 @@ export default function BookPageClient({ book }: { book: any }) {
             </div>
             <div className="w-8/12 text-gray-700">{book.authorDescription}</div>
           </div>
+          {isSubscribeOpen && (
+            <SubscribeModal onClose={() => setIsSubscribeOpen(false)} />
+          )}
           <SummaryModal
             isOpen={isReadOpen}
             onClose={() => setIsReadOpen(false)}
