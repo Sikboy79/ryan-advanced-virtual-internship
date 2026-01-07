@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../app/library/firebase";
+import { auth } from "../../app/library/firebase";
 import { useAuthStore } from "@/store/useAuthStore";
 
 export default function AuthProvider({

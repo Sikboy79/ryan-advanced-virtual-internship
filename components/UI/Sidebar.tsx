@@ -11,7 +11,7 @@ import {
   FiLogIn,
   FiLogOut,
 } from "react-icons/fi";
-import { useUserStore } from "@/store/useAuthStore";
+import { useAuthStore } from "@/store/useAuthStore";
 import { logoutUser } from "@/app/library/auth";
 import { useRouter } from "next/navigation";
 
@@ -21,8 +21,7 @@ interface SidebarProps {
 
 function Sidebar({ setIsLoginOpen }: SidebarProps) {
   const router = useRouter();
-  const { user, clearUser } = useUserStore();
-
+  const { user, clearUser } = useAuthStore();
   const handleLogout = async () => {
     await logoutUser();
     clearUser();
@@ -41,10 +40,20 @@ function Sidebar({ setIsLoginOpen }: SidebarProps) {
       <nav className="flex-1">
         <NavItem href="/for-you" icon={<FiHome />} label="For you" />
         <NavItem href="/my-library" icon={<FiBookmark />} label="My Library" />
-        <NavItem href="/highlights" icon={<FiEdit />} label="Highlights" disabled />
-        <NavItem href="/search" icon={<FiSearch />} label="Search" disabled/>
+        <NavItem
+          href="/highlights"
+          icon={<FiEdit />}
+          label="Highlights"
+          disabled
+        />
+        <NavItem href="/search" icon={<FiSearch />} label="Search" disabled />
         <NavItem href="/settings" icon={<FiSettings />} label="Settings" />
-        <NavItem href="/help" icon={<FiHelpCircle />} label="Help & Support" disabled/>
+        <NavItem
+          href="/help"
+          icon={<FiHelpCircle />}
+          label="Help & Support"
+          disabled
+        />
       </nav>
       <div className="px-4 pb-6">
         {user ? (

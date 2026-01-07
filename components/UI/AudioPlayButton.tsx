@@ -47,15 +47,15 @@ export default function AudioPlayer({ src }: { src: string }) {
   const formatTime = (time: number) => {
     if (isNaN(time)) return "0 seconds";
     const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60)
+    const seconds = Math.floor(time % 60);
     if (minutes === 0) {
-    return `${seconds} second${seconds !== 1 ? "s" : ""}`;
-  }
+      return `${seconds} second${seconds !== 1 ? "s" : ""}`;
+    }
 
-  return `${minutes} minute${minutes !== 1 ? "s" : ""} ${seconds
-    .toString()
-    .padStart(2, "0")} second${seconds !== 1 ? "s" : ""}`;
-};
+    return `${minutes} minute${minutes !== 1 ? "s" : ""} ${seconds
+      .toString()
+      .padStart(2, "0")} second${seconds !== 1 ? "s" : ""}`;
+  };
 
   return (
     <div className="flex items-center gap-3">
@@ -69,14 +69,8 @@ export default function AudioPlayer({ src }: { src: string }) {
           <FaPlay className="text-white ml-[2px]" />
         )}
       </button>
-
-      <span className="text-sm text-gray-700">
-        {formatTime(currentTime)}
-      </span>
-
+      <span className="text-sm text-gray-700">{formatTime(currentTime)}</span>
       <audio ref={audioRef} src={src} preload="metadata" />
     </div>
   );
 }
-
-

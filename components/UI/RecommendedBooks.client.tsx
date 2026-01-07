@@ -9,9 +9,7 @@ import { FadeInItem } from "./Animations";
 export default function RecommendedBooksClient({ books }: { books: any[] }) {
   const VISIBLE = 5;
   const [index, setIndex] = useState(0);
-
   const maxIndex = Math.max(0, books.length - VISIBLE);
-
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
 
@@ -19,9 +17,7 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
     <section className="mb-10 ">
       <h2 className="text-2xl font-bold mb-1">Recommended For You</h2>
       <p className="text-gray-500 mb-6">We think you’ll like these</p>
-
       <div className="relative overflow-hidden">
-        {/* LEFT BUTTON */}
         {index > 0 && (
           <button
             onClick={prev}
@@ -30,8 +26,6 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
             <FiChevronLeft size={20} />
           </button>
         )}
-
-        {/* RIGHT BUTTON */}
         {index < maxIndex && (
           <button
             onClick={next}
@@ -40,8 +34,6 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
             <FiChevronRight size={20} />
           </button>
         )}
-
-        {/* TRACK */}
         <FadeInItem>
           <div
             className="flex transition-transform duration-500 ease-out"

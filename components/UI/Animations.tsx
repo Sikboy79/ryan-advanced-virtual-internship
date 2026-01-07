@@ -32,7 +32,7 @@ export const FadeInItem = ({ children }: FadeColorItemProps) => {
   return (
     <div
       data-aos="fade-in"
-      data-aos-duration="1200"
+      data-aos-duration="800"
       data-aos-easing="ease-in-sine"
       data-aos-once="false"
     >
