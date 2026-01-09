@@ -33,7 +33,8 @@ export default function BookPageClient({ book }: { book: any }) {
 
   const handleListen = () => {
     if (!hasAccess) {
-      setIsSubscribeOpen(true); 
+      setIsSubscribeOpen(true);
+      return;
     }
 
     audioRef.current?.toggle();
@@ -41,7 +42,7 @@ export default function BookPageClient({ book }: { book: any }) {
 
   const handleRead = () => {
     if (!hasAccess) {
-      setIsSubscribeOpen(true); 
+      setIsSubscribeOpen(true);
       return;
     }
 
@@ -86,12 +87,7 @@ export default function BookPageClient({ book }: { book: any }) {
                 <button
                   onClick={handleRead}
                   className={`bg-[#0f2a44] text-white px-6 py-3 w-36 rounded-md font-normal flex justify-around items-center hover:opacity-80
-                    ${
-                      !hasAccess
-                        ? "opacity-50"
-                        : "opacity-50"
-                    }`
-                }
+                    ${!hasAccess ? "opacity-50" : "opacity-50"}`}
                 >
                   <FiBookOpen />
                   <span>{hasAccess ? "Read" : "Subscribe to read"}</span>
@@ -99,9 +95,7 @@ export default function BookPageClient({ book }: { book: any }) {
                 <button
                   onClick={handleListen}
                   className={`bg-[#0f2a44] text-white px-6 py-3 w-36 rounded-md font-normal flex justify-around items-center
-                         hover:opacity-80 ${
-                           !hasAccess ? "opacity-50" : ""
-                         }
+                         hover:opacity-80 ${!hasAccess ? "opacity-50" : ""}
                         `}
                 >
                   <FiMic />
