@@ -9,10 +9,10 @@ import Sidebar from "@/components/UI/Sidebar";
 import { LiaLightbulb } from "react-icons/lia";
 import { useRef } from "react";
 import AudioPlayer, { AudioPlayerHandle } from "@/components/UI/AudioPlayer";
-import SummaryModal from "@/components/SummaryModal";
+import SummaryModal from "@/app/account/SummaryModal";
 import { useLibraryStore } from "@/store/useMyLibraryStore";
 import { useSubscription } from "@/store/useSubscriptions";
-import SubscribeModal from "@/components/SubscribeModal";
+import SubscribeModal from "@/app/account/SubscribeModal";
 
 export default function BookPageClient({ book }: { book: any }) {
   const [mounted, setMounted] = useState(false);

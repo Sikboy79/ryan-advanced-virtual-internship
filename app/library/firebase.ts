@@ -3,6 +3,7 @@ import { getAuth, signInAnonymously } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getFunctions } from "firebase/functions";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyC0XpmsGmGnMFW96CgA0rp3KgC_ChG25EA",
   authDomain: "advanced-virtual-interns-2b133.firebaseapp.com",
@@ -23,3 +24,4 @@ export const loginAsGuest = async () => {
   }
   return auth.currentUser;
 };
+
