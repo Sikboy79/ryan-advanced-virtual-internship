@@ -14,6 +14,7 @@ import {
   FadeUpFastItem,
   FadeColorItem,
 } from "./UI/Animations";
+import Footer from "./footer";
 
 export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -397,7 +398,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="footer">
+      <Footer/>
+      {/* <section id="footer">
         <div className="container">
           <div className="row">
             <div className="footer__top--wrapper">
@@ -477,7 +479,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </>
   );
 }

@@ -9,7 +9,7 @@ import { useState } from "react";
 import { FiClock, FiStar } from "react-icons/fi";
 
 export default function LibraryPage() {
-  const { savedBooks, finishedBooks } = useLibraryStore();
+  const { savedBooks } = useLibraryStore();
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
   return (
