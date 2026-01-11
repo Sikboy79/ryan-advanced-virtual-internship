@@ -19,7 +19,11 @@ export function PlanCard({
     <div
       onClick={onClick}
       className={`cursor-pointer border rounded-xl p-6 flex gap-4 items-start transition
-        ${selected ? "border-green-500 ring-2 ring-green-400" : "border-gray-300"}
+        ${
+          selected
+            ? "border-green-500 ring-2 ring-green-400"
+            : "border-gray-300"
+        }
         ${highlight ? "bg-green-50" : "bg-gray-50"}
       `}
     >

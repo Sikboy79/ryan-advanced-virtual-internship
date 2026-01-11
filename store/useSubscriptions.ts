@@ -17,12 +17,7 @@ export function useSubscription() {
       return;
     }
 
-    const ref = collection(
-      db,
-      "customers",
-      user.uid,
-      "subscriptions"
-    );
+    const ref = collection(db, "customers", user.uid, "subscriptions");
 
     const unsub = onSnapshot(ref, (snapshot) => {
       let activeSub = null;

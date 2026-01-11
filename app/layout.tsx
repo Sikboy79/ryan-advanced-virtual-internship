@@ -4,7 +4,6 @@ import "../styles/globals.css";
 import AuthProvider from "@/components/UI/AuthProvider";
 import Providers from "./providers";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -38,4 +37,3 @@ export default function RootLayout({
     </html>
   );
 }
-

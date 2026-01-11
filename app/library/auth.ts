@@ -8,10 +8,13 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 import { auth } from "./firebase";
-import { getAuth, signInAnonymously, sendPasswordResetEmail} from "firebase/auth";
+import {
+  getAuth,
+  signInAnonymously,
+  sendPasswordResetEmail,
+} from "firebase/auth";
 
 const googleProvider = new GoogleAuthProvider();
-
 
 export const loginWithGuest = async () => {
   const auth = getAuth();
@@ -28,8 +31,7 @@ export const loginWithEmail = (email: string, password: string) =>
 export const registerWithEmail = (email: string, password: string) =>
   createUserWithEmailAndPassword(auth, email, password);
 
-export const loginWithGoogle = () =>
-  signInWithPopup(auth, googleProvider);
+export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
 
 export const logout = () => signOut(auth);
 

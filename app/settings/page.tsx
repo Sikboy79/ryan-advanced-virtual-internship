@@ -1,4 +1,4 @@
 
-export default function ForYouPage() {
+export default function Settings() {
   return "settings"
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { app } from "../firebase"; 
+import { app } from "../firebase";
 
 export const openBillingPortal = async () => {
   const functions = getFunctions(app);
