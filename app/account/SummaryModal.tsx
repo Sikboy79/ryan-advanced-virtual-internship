@@ -1,4 +1,5 @@
 "use client";
+import { useSubscription } from "@/store/useSubscriptions";
 
 interface SummaryModalProps {
   isOpen: boolean;
@@ -13,7 +14,18 @@ export default function SummaryModal({
   summary,
   title,
 }: SummaryModalProps) {
+  const { subscription, loading } = useSubscription();
+  const hasAccess = !!subscription;
+
   if (!isOpen) return null;
+
+  if (!hasAccess) {
+    return (
+      <div className="p-6 text-center">
+        <h3 className="text-lg font-semibold">Subscribe to read summaries</h3>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">

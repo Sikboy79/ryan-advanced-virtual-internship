@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import LoginModal from "@/components/LoginModal";
 import { useAuthStore } from "../store/useAuthStore";
 import { onAuthChanged } from "../app/library/auth";
@@ -14,6 +14,7 @@ import {
   FadeUpFastItem,
   FadeColorItem,
 } from "./UI/Animations";
+import Footer from "./footer";
 
 export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function Home() {
 
   return (
     <>
-      <nav className="p-4 flex justify-between items-center bg-gray-100">
+      {/* <nav className="p-4 flex justify-between items-center bg-gray-100">
         <div>
           {user ? (
             <span>Welcome, {user.email}</span>
@@ -40,7 +41,7 @@ export default function Home() {
             </button>
           )}
         </div>
-      </nav>
+      </nav> */}
       <nav className="nav">
         <div className="nav__wrapper">
           <figure className="nav__img--mask">
@@ -76,7 +77,7 @@ export default function Home() {
                   </div>
                 </FadeInItem>
                 <FadeInItem>
-                  <FadeUpSlowItem>
+                  <FadeUpSlowItem className="z-1">
                     <div className="landing__content__subtitle">
                       Great summaries for busy people,
                       <br className="remove--tablet" />
@@ -87,7 +88,7 @@ export default function Home() {
                   </FadeUpSlowItem>
                 </FadeInItem>
                 <button
-                  className="btn home__cta--btn"
+                  className="btn home__cta--btn relative z-10"
                   onClick={() => setIsLoginOpen(true)}
                   style={{ cursor: "pointer" }}
                 >
@@ -147,19 +148,13 @@ export default function Home() {
             <div className="statistics__wrapper">
               <div className="statistics__content--header">
                 <FadeColorItem delay="10">
-                  <div className="color-animate">
-                    Enhance your knowledge
-                  </div>
+                  <div className="color-animate">Enhance your knowledge</div>
                 </FadeColorItem>
                 <FadeColorItem delay="20">
-                  <div className="color-animate-1">
-                    Achieve greater success
-                  </div>
+                  <div className="color-animate-1">Achieve greater success</div>
                 </FadeColorItem>
                 <FadeColorItem delay="30">
-                  <div className="color-animate-2">
-                    Improve your health
-                  </div>
+                  <div className="color-animate-2">Improve your health</div>
                 </FadeColorItem>
                 <FadeColorItem delay="40">
                   <div className="color-animate-3">
@@ -167,9 +162,7 @@ export default function Home() {
                   </div>
                 </FadeColorItem>
                 <FadeColorItem delay="50">
-                  <div className="color-animate-4">
-                    Increase happiness
-                  </div>
+                  <div className="color-animate-4">Increase happiness</div>
                 </FadeColorItem>
                 <FadeColorItem delay="60">
                   <div className="color-animate-5">
@@ -225,14 +218,10 @@ export default function Home() {
               </div>
               <div className="statistics__content--header statistics__content--header-second">
                 <FadeColorItem delay="10">
-                  <div className="color-animate">
-                    Expand your learning
-                  </div>
+                  <div className="color-animate">Expand your learning</div>
                 </FadeColorItem>
                 <FadeColorItem delay="20">
-                  <div className="color-animate-1">
-                    Accomplish your goals
-                  </div>
+                  <div className="color-animate-1">Accomplish your goals</div>
                 </FadeColorItem>
                 <FadeColorItem delay="30">
                   <div className="color-animate-2">
@@ -241,18 +230,14 @@ export default function Home() {
                 </FadeColorItem>
                 <FadeColorItem delay="40">
                   <div className="color-animate-3">
-                     Become a better caregiver
+                    Become a better caregiver
                   </div>
                 </FadeColorItem>
                 <FadeColorItem delay="50">
-                  <div className="color-animate-4">
-                    Improve your mood
-                  </div>
+                  <div className="color-animate-4">Improve your mood</div>
                 </FadeColorItem>
                 <FadeColorItem delay="60">
-                  <div className="color-animate-5">
-                    Maximize your abilities
-                  </div>
+                  <div className="color-animate-5">Maximize your abilities</div>
                 </FadeColorItem>
               </div>
             </div>
@@ -397,87 +382,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="footer">
-        <div className="container">
-          <div className="row">
-            <div className="footer__top--wrapper">
-              <div className="footer__block">
-                <div className="footer__link--title">Actions</div>
-                <div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Summarist Magazine</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Cancel Subscription</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Help</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Contact us</a>
-                  </div>
-                </div>
-              </div>
-              <div className="footer__block">
-                <div className="footer__link--title">Useful Links</div>
-                <div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Pricing</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Summarist Business</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Gift Cards</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Authors & Publishers</a>
-                  </div>
-                </div>
-              </div>
-              <div className="footer__block">
-                <div className="footer__link--title">Company</div>
-                <div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">About</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Careers</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Partners</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Code of Conduct</a>
-                  </div>
-                </div>
-              </div>
-              <div className="footer__block">
-                <div className="footer__link--title">Other</div>
-                <div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Sitemap</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Legal Notice</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Terms of Service</a>
-                  </div>
-                  <div className="footer__link--wrapper">
-                    <a className="footer__link">Privacy Policies</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="footer__copyright--wrapper">
-              <div className="footer__copyright">
-                Copyright &copy; 2023 Summarist.
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Footer />
     </>
   );
 }

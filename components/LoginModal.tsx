@@ -8,7 +8,7 @@ import {
   loginWithGuest,
   sendPasswordReset,
 } from "../app/library/auth";
-import { useAuthStore} from "../store/useAuthStore";
+import { useAuthStore } from "../store/useAuthStore";
 import { useRouter } from "next/navigation";
 
 type Props = {

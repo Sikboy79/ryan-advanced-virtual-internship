@@ -24,21 +24,21 @@ export const useLibraryStore = create<LibraryState>()(
       savedBooks: [],
 
       toggleBook: (book) => {
-        const exists = get().savedBooks.some(b => b.id === book.id);
+        const exists = get().savedBooks.some((b) => b.id === book.id);
 
         set({
           savedBooks: exists
-            ? get().savedBooks.filter(b => b.id !== book.id)
+            ? get().savedBooks.filter((b) => b.id !== book.id)
             : [...get().savedBooks, book],
         });
       },
 
       isSaved: (id) => {
-        return get().savedBooks.some(b => b.id === id);
+        return get().savedBooks.some((b) => b.id === id);
       },
     }),
     {
-      name: "library-storage", 
+      name: "library-storage",
     }
   )
 );
