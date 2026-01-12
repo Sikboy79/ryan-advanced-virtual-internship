@@ -1,43 +1,79 @@
 "use client";
 
-import {
-  useEffect,
-  useRef,
-  useState,
-  forwardRef,
-  useImperativeHandle,
-} from "react";
+import { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 
 export interface AudioPlayerHandle {
-  toggle: () => void;
   play: () => void;
   pause: () => void;
+  toggle: () => void;
+  skip: (seconds: number) => void;
+  setTime: (seconds: number) => void;
+  setPlaybackRate: (rate: number) => void;
+  getCurrentTime: () => number;
+  getDuration: () => number;
 }
 
-const AudioPlayer = forwardRef<AudioPlayerHandle, { src: string }>(
-  ({ src }, ref) => {
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
+interface AudioPlayerProps {
+  src: string;
+  onEnded?: () => void;
+}
 
+const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(
+  ({ src, onEnded }, ref) => {
+    const audioRef = useRef<HTMLAudioElement>(null);
+
+    // Expose imperative methods
     useImperativeHandle(ref, () => ({
-      toggle() {
-        if (!audioRef.current) return;
-        isPlaying ? audioRef.current.pause() : audioRef.current.play();
-        setIsPlaying(!isPlaying);
+      play: () => audioRef.current?.play(),
+      pause: () => audioRef.current?.pause(),
+      toggle: () => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        audio.paused ? audio.play() : audio.pause();
       },
-      play() {
-        audioRef.current?.play();
-        setIsPlaying(true);
+      skip: (seconds: number) => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        audio.currentTime = Math.min(
+          Math.max(0, audio.currentTime + seconds),
+          audio.duration || 0
+        );
       },
-      pause() {
-        audioRef.current?.pause();
-        setIsPlaying(false);
+      setTime: (seconds: number) => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        audio.currentTime = seconds;
       },
+      setPlaybackRate: (rate: number) => {
+        const audio = audioRef.current;
+        if (!audio) return;
+        audio.playbackRate = rate;
+      },
+      getCurrentTime: () => audioRef.current?.currentTime || 0,
+      getDuration: () => audioRef.current?.duration || 0,
     }));
 
-    return <audio ref={audioRef} src={src} preload="metadata" />;
+    // Reliable ended event listener
+    useEffect(() => {
+      const audio = audioRef.current;
+      if (!audio || !onEnded) return;
+
+      const handleEnded = () => {
+        onEnded();
+      };
+
+      audio.addEventListener("ended", handleEnded);
+      return () => audio.removeEventListener("ended", handleEnded);
+    }, [onEnded]);
+
+    return <audio ref={audioRef} src={src} preload="auto" style={{ display: "none" }} />;
   }
 );
 
 AudioPlayer.displayName = "AudioPlayer";
+
 export default AudioPlayer;
+
+
+
+

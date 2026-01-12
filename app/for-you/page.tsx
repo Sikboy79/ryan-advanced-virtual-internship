@@ -1,10 +1,10 @@
 import ClientDashboardLayout from "@/components/Layout/ClientDashboardLayout";
-import AudioPlayButton from "@/components/UI/AudioPlayButton";
 import SearchInput from "@/components/UI/SearchInput";
 import axios from "axios";
 import { FadeInItem } from "../../components/UI/Animations";
 import RecommendedBooks from "../../components/UI/RecommendedBooks";
 import SuggestedBooks from "@/components/UI/SuggestedBooks";
+import AudioPlayer from "@/components/UI/AudioPlayer";
 
 interface Book {
   id: string;
@@ -68,7 +68,7 @@ export default async function ForYou() {
                       </h3>
                       <p className="text-sm text-gray-700">{book.author}</p>
                       {book.audioLink && (
-                        <AudioPlayButton src={book.audioLink} />
+                        <AudioPlayer src={book.audioLink} />
                       )}
                     </div>
                   </div>

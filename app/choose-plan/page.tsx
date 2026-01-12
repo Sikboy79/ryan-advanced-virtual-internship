@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { auth, app, loginAsGuest } from "../library/firebase";
 import { getCheckoutUrl } from "../account/stripePayment";
 import { PlanCard } from "../../components/PlanCard";
@@ -13,8 +13,11 @@ import { FaHandshakeSimple } from "react-icons/fa6";
 import { FiChevronDown } from "react-icons/fi";
 
 export default function ChoosePlanPage() {
+  const params = useParams();
   const router = useRouter();
-  const [selectedPlan, setSelectedPlan] = useState<"yearly" | "monthly">("yearly");
+  const [selectedPlan, setSelectedPlan] = useState<"yearly" | "monthly">(
+    "yearly"
+  );
   const [loading, setLoading] = useState(false);
   const [openIndex, setOpenIndex] = useState<number | null>(1);
 
@@ -40,8 +43,12 @@ export default function ChoosePlanPage() {
       if (!auth.currentUser) {
         await loginAsGuest();
       }
+      if (!prices || !prices[selectedPlan]) {
+        throw new Error("Price not found for selected plan");
+      }
+
       const checkoutUrl = await getCheckoutUrl(app, prices[selectedPlan].id);
-      router.push(checkoutUrl);
+      window.location.href = checkoutUrl;
     } catch (err) {
       console.error("Checkout error:", err);
       setLoading(false);
@@ -78,7 +85,10 @@ export default function ChoosePlanPage() {
       book per day.`,
     },
   ];
-  const buttonText = selectedPlan === "monthly" ? "Start your first month" : prices[selectedPlan].cta;
+  const buttonText =
+    selectedPlan === "monthly"
+      ? "Start your first month"
+      : prices[selectedPlan].cta;
   const buttonSubtext =
     selectedPlan === "monthly"
       ? "30-day money back guarantee, no questions asked."
@@ -118,7 +128,8 @@ export default function ChoosePlanPage() {
             <AiFillFileText />
           </figure>
           <p className="text-base text-gray-800">
-            <span className="font-bold">Key ideas in a few min</span> with many books to read
+            <span className="font-bold">Key ideas in a few min</span> with many
+            books to read
           </p>
         </div>
         <div className="flex flex-col items-center max-w-xs">
@@ -126,7 +137,8 @@ export default function ChoosePlanPage() {
             <GrGrow />
           </figure>
           <p className="text-base text-gray-800">
-            <span className="font-bold">3 million</span> people growing with Summarist everyday
+            <span className="font-bold">3 million</span> people growing with
+            Summarist everyday
           </p>
         </div>
         <div className="flex flex-col items-center max-w-xs">
@@ -134,13 +146,16 @@ export default function ChoosePlanPage() {
             <FaHandshakeSimple />
           </figure>
           <p className="text-base text-gray-800">
-            <span className="font-bold">Precise recommendations</span> collections curated by experts
+            <span className="font-bold">Precise recommendations</span>{" "}
+            collections curated by experts
           </p>
         </div>
       </div>
       <div className="min-h-screen bg-white px-4 py-16">
         <div className="relative w-full max-w-2xl mx-auto space-y-8">
-          <h1 className="text-3xl font-bold text-center">Choose the plan that fits you</h1>
+          <h1 className="text-3xl font-bold text-center">
+            Choose the plan that fits you
+          </h1>
           {/* YEARLY */}
           <PlanCard
             selected={selectedPlan === "yearly"}
@@ -167,7 +182,9 @@ export default function ChoosePlanPage() {
             >
               {buttonText}
             </button>
-            <p className="text-center text-sm text-gray-500 mt-3">{buttonSubtext}</p>
+            <p className="text-center text-sm text-gray-500 mt-3">
+              {buttonSubtext}
+            </p>
           </div>
         </div>
       </div>
@@ -180,13 +197,19 @@ export default function ChoosePlanPage() {
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className="flex w-full items-center justify-between text-left"
               >
-                <h3 className="text-xl font-semibold text-[#062f43]">{item.q}</h3>
+                <h3 className="text-xl font-semibold text-[#062f43]">
+                  {item.q}
+                </h3>
                 <FiChevronDown
-                  className={`text-2xl transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  className={`text-2xl transition-transform ${
+                    isOpen ? "rotate-180" : ""
+                  }`}
                 />
               </button>
 
-              {isOpen && <p className="mt-4 text-gray-600 leading-relaxed">{item.a}</p>}
+              {isOpen && (
+                <p className="mt-4 text-gray-600 leading-relaxed">{item.a}</p>
+              )}
             </div>
           );
         })}
@@ -195,4 +218,3 @@ export default function ChoosePlanPage() {
     </>
   );
 }
-

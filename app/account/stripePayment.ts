@@ -11,10 +11,10 @@ import {
 
 export const getCheckoutUrl = async (
   app: FirebaseApp,
-  priceId: string
+  priceId: string,
 ): Promise<string> => {
   const auth = getAuth(app);
-
+  
   if (!auth.currentUser) {
     await new Promise<void>((resolve) => {
       const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,11 +37,12 @@ export const getCheckoutUrl = async (
     "checkout_sessions"
   );
 
+
   const docRef = await addDoc(checkoutSessionsRef, {
     price: priceId,
-    success_url: window.location.origin,
+    success_url: `${window.location.origin}/for-you`,
     cancel_url: window.location.origin,
-    locale: "en",
+    
   });
 
   return new Promise<string>((resolve, reject) => {
