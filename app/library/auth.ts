@@ -6,6 +6,8 @@ import {
   signOut,
   User,
   onAuthStateChanged,
+  EmailAuthProvider,
+  linkWithCredential,
 } from "firebase/auth";
 import { auth } from "./firebase";
 import {
@@ -25,13 +27,32 @@ export const logoutUser = async () => {
   await signOut(auth);
 };
 
-export const loginWithEmail = (email: string, password: string) =>
-  signInWithEmailAndPassword(auth, email, password);
+export const loginWithEmail = async (email: string, password: string) => {
+  if (auth.currentUser?.isAnonymous) {
+    const credential = EmailAuthProvider.credential(email, password);
+    return await linkWithCredential(auth.currentUser, credential);
+  }
 
-export const registerWithEmail = (email: string, password: string) =>
-  createUserWithEmailAndPassword(auth, email, password);
+  return await signInWithEmailAndPassword(auth, email, password);
+};
 
-export const loginWithGoogle = () => signInWithPopup(auth, googleProvider);
+export const registerWithEmail = async (email: string, password: string) => {
+  if (auth.currentUser?.isAnonymous) {
+    const credential = EmailAuthProvider.credential(email, password);
+    return await linkWithCredential(auth.currentUser, credential);
+  }
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const loginWithGoogle = async () => {
+  if (auth.currentUser?.isAnonymous) {
+    const result = await signInWithPopup(auth, googleProvider);
+    return result;
+  }
+
+  return await signInWithPopup(auth, googleProvider);
+};
 
 export const logout = () => signOut(auth);
 
@@ -39,13 +60,11 @@ export const onAuthChanged = (callback: (user: User | null) => void) =>
   onAuthStateChanged(auth, callback);
 
 export const sendPasswordReset = async (email: string) => {
-  const auth = getAuth();
   try {
     await sendPasswordResetEmail(auth, email);
-    console.log("Password reset email sent!");
     return true;
   } catch (error: any) {
-    console.error("Error sending password reset email:", error.message);
+    console.error("Password reset error:", error.message);
     throw error;
   }
 };

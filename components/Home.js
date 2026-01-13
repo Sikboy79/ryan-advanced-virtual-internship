@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import LoginModal from "@/components/LoginModal";
 import { useAuthStore } from "../store/useAuthStore";
 import { onAuthChanged } from "../app/library/auth";
@@ -18,8 +18,11 @@ import Footer from "./footer";
 
 export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const user = useAuthStore((state) => state.user);
   const setUser = useAuthStore((state) => state.setUser);
+  const menuRef = useRef(null);       
+  const triggerRef = useRef(null); 
 
   useEffect(() => {
     const unsubscribe = onAuthChanged(setUser);
@@ -28,20 +31,6 @@ export default function Home() {
 
   return (
     <>
-      {/* <nav className="p-4 flex justify-between items-center bg-gray-100">
-        <div>
-          {user ? (
-            <span>Welcome, {user.email}</span>
-          ) : (
-            <button
-              onClick={() => setIsLoginOpen(true)}
-              className="rounded bg-black px-4 py-2 text-white"
-            >
-              Login
-            </button>
-          )}
-        </div>
-      </nav> */}
       <nav className="nav">
         <div className="nav__wrapper">
           <figure className="nav__img--mask">
@@ -53,18 +42,40 @@ export default function Home() {
           </figure>
           <ul className="nav__list--wrapper">
             <li
-              className="nav__list nav__list--login"
+              className="nav__list nav__list--login hidden"
               onClick={() => setIsLoginOpen(true)}
-              style={{ cursor: "pointer" }}
             >
               Login
             </li>
-            <li className="nav__list nav__list--mobile">About</li>
-            <li className="nav__list nav__list--mobile">Contact</li>
-            <li className="nav__list nav__list--mobile">Help</li>
+            <li className="nav__list nav__list--desktop">About</li>
+            <li className="nav__list nav__list--desktop">Contact</li>
+            <li className="nav__list nav__list--desktop">Help</li>
+            {!menuOpen && (
+              <li
+                ref={triggerRef}
+                className="nav__hamburger ml-5"
+                onClick={() => setMenuOpen(true)}
+              >
+                ☰
+              </li>
+            )}
           </ul>
         </div>
+        {menuOpen && (
+          <ul ref={menuRef} className="nav__mobile-menu">
+            <li
+              className="nav__mobile-close"
+              onClick={() => setMenuOpen(false)}
+            >
+              ✕
+            </li>
+            <li>About</li>
+            <li>Contact</li>
+            <li>Help</li>
+          </ul>
+        )}
       </nav>
+      {isLoginOpen && <LoginModal onClose={() => setIsLoginOpen(false)} />}
       <section id="landing">
         <div className="container">
           <div className="row">
@@ -88,7 +99,7 @@ export default function Home() {
                   </FadeUpSlowItem>
                 </FadeInItem>
                 <button
-                  className="btn home__cta--btn relative z-10"
+                  className="btn home__cta--btn  relative z-10"
                   onClick={() => setIsLoginOpen(true)}
                   style={{ cursor: "pointer" }}
                 >

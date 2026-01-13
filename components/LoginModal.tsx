@@ -110,7 +110,6 @@ export default function LoginModal({ isOpen, onClose }: Props) {
             {isRegister ? "Sign up to Summarist" : "Log in to Summarist"}
           </h2>
           {error && <p className="text-red-600 text-center mt-2">{error}</p>}
-
           {!isRegister && (
             <>
               <button
