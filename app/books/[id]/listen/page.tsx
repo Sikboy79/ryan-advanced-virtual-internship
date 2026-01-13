@@ -40,7 +40,7 @@ export default function ListenPage() {
 
   return (
     <>
-      <div className="search__input--wrapper flex justify-end m-1">
+      <div className="flex justify-end m-1">
         <SearchInput />
       </div>
       <Sidebar

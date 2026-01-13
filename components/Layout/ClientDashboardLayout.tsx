@@ -18,9 +18,14 @@ export default function ClientDashboardLayout({
   if (loading) return null; // or skeleton loader
 
   return (
-    <div className="flex min-h-screen ">
-      <Sidebar setIsLoginOpen={setIsLoginOpen} />
-      <main className="ml-48 flex-1 p-8 bg-white">{children}</main>
+    <div className="flex flex-col md:flex-row ">
+      <aside className="hidden md:flex flex-col w-52">
+        <Sidebar setIsLoginOpen={setIsLoginOpen} />
+      </aside>
+      <main className="flex-1 py-6 px-4 bg-white max-w-full">
+        {children}
+      </main>
+
       {isLoginOpen && (
         <LoginModal
           isOpen={isLoginOpen}
@@ -30,3 +35,4 @@ export default function ClientDashboardLayout({
     </div>
   );
 }
+

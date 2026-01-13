@@ -22,7 +22,6 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(
   ({ src, onEnded }, ref) => {
     const audioRef = useRef<HTMLAudioElement>(null);
 
-    // Expose imperative methods
     useImperativeHandle(ref, () => ({
       play: () => audioRef.current?.play(),
       pause: () => audioRef.current?.pause(),
@@ -53,7 +52,6 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(
       getDuration: () => audioRef.current?.duration || 0,
     }));
 
-    // Reliable ended event listener
     useEffect(() => {
       const audio = audioRef.current;
       if (!audio || !onEnded) return;

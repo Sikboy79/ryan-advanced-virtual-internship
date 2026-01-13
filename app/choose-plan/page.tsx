@@ -37,15 +37,11 @@ export default function ChoosePlanPage() {
       cta: "Continue to checkout",
     },
   };
+
   const handleCheckout = async () => {
     try {
       setLoading(true);
-      if (!auth.currentUser) {
-        await loginAsGuest();
-      }
-      if (!prices || !prices[selectedPlan]) {
-        throw new Error("Price not found for selected plan");
-      }
+      if (!auth.currentUser) await loginAsGuest();
 
       const checkoutUrl = await getCheckoutUrl(app, prices[selectedPlan].id);
       window.location.href = checkoutUrl;
@@ -54,6 +50,7 @@ export default function ChoosePlanPage() {
       setLoading(false);
     }
   };
+
   const faqs = [
     {
       q: "How does the free 7-day trial work?",
@@ -85,6 +82,7 @@ export default function ChoosePlanPage() {
       book per day.`,
     },
   ];
+
   const buttonText =
     selectedPlan === "monthly"
       ? "Start your first month"
@@ -97,66 +95,66 @@ export default function ChoosePlanPage() {
   return (
     <>
       <section className="relative bg-[#062f43] text-white rounded-b-[40%]">
-        <div className="max-w-5xl mx-auto px-6 pt-24 pb-20 text-center mb-0">
-          <h1 className="text-4xl md:text-5xl font-bold leading-tight ">
+        <div className="max-w-5xl mx-auto px-6 pt-24 pb-20 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
             Get unlimited access to many
             <br />
             amazing books to read
           </h1>
-          <p className="mt-6 text-lg text-white/80">
+          <p className="mt-6 text-lg sm:text-xl text-white/80">
             Turn ordinary moments into amazing learning opportunities
           </p>
         </div>
-        <div className="relative flex justify-center z-10">
-          <div className="w-[340px] h-[340px] md:w-[420px] md:h-[420px] rounded-t-full rounded-b-none overflow-hidden bg-white">
-            <figure>
-              <Image
-                src="/media/pricing-top.png"
-                alt="Pricing illustration"
-                width={860}
-                height={722}
-                className="object-cover w-full h-full"
-                priority
-              />
-            </figure>
+        <div className="relative flex justify-center z-10 mt-12">
+          <div className="w-72 h-72 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] rounded-t-full rounded-b-none overflow-hidden bg-white">
+            <Image
+              src="/media/pricing-top.png"
+              alt="Pricing illustration"
+              width={860}
+              height={722}
+              className="object-cover w-full h-full"
+              priority
+            />
           </div>
         </div>
       </section>
-      <div className="plan-features flex w-full justify-center gap-24 py-12 text-center">
-        <div className="flex flex-col items-center max-w-xs">
-          <figure className="mb-4 text-[#062f43] text-4xl">
-            <AiFillFileText />
-          </figure>
-          <p className="text-base text-gray-800">
-            <span className="font-bold">Key ideas in a few min</span> with many
-            books to read
-          </p>
-        </div>
-        <div className="flex flex-col items-center max-w-xs">
-          <figure className="mb-4 text-[#062f43] text-4xl">
-            <GrGrow />
-          </figure>
-          <p className="text-base text-gray-800">
-            <span className="font-bold">3 million</span> people growing with
-            Summarist everyday
-          </p>
-        </div>
-        <div className="flex flex-col items-center max-w-xs">
-          <figure className="mb-4 text-[#062f43] text-4xl">
-            <FaHandshakeSimple />
-          </figure>
-          <p className="text-base text-gray-800">
-            <span className="font-bold">Precise recommendations</span>{" "}
-            collections curated by experts
-          </p>
-        </div>
+      <div className="plan-features flex flex-wrap justify-center gap-8 py-12 text-center">
+        {[
+          {
+            icon: AiFillFileText,
+            text: "Key ideas in a few min with many books to read",
+            bold: "Key ideas in a few min",
+          },
+          {
+            icon: GrGrow,
+            text: "3 million people growing with Summarist everyday",
+            bold: "3 million",
+          },
+          {
+            icon: FaHandshakeSimple,
+            text: "Precise recommendations collections curated by experts",
+            bold: "Precise recommendations",
+          },
+        ].map((feat, i) => {
+          const Icon = feat.icon;
+          return (
+            <div key={i} className="flex flex-col items-center max-w-xs">
+              <figure className="mb-4 text-[#062f43] text-4xl">
+                <Icon />
+              </figure>
+              <p className="text-base text-gray-800">
+                <span className="font-bold">{feat.bold}</span>{" "}
+                {feat.text.replace(feat.bold, "")}
+              </p>
+            </div>
+          );
+        })}
       </div>
       <div className="min-h-screen bg-white px-4 py-16">
         <div className="relative w-full max-w-2xl mx-auto space-y-8">
-          <h1 className="text-3xl font-bold text-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-center">
             Choose the plan that fits you
           </h1>
-          {/* YEARLY */}
           <PlanCard
             selected={selectedPlan === "yearly"}
             onClick={() => setSelectedPlan("yearly")}
@@ -166,7 +164,6 @@ export default function ChoosePlanPage() {
             highlight
           />
           <div className="text-center text-gray-400">or</div>
-          {/* MONTHLY */}
           <PlanCard
             selected={selectedPlan === "monthly"}
             onClick={() => setSelectedPlan("monthly")}
@@ -174,7 +171,7 @@ export default function ChoosePlanPage() {
             price={prices.monthly.price}
             subtitle={prices.monthly.subtitle}
           />
-          <div className="sticky bottom-0 bg-white/95 backdrop-blur pt-4 border-t">
+          <div className="sticky bottom-0 bg-white/95 backdrop-blur pt-4 border-t mt-8">
             <button
               onClick={handleCheckout}
               disabled={loading}
@@ -188,7 +185,7 @@ export default function ChoosePlanPage() {
           </div>
         </div>
       </div>
-      <div className="max-w-4xl mx-auto divide-y border-t border-b mb-10 mt-10">
+      <div className="max-w-4xl mx-auto divide-y border-t border-b mb-10 mt-10 px-4 sm:px-0">
         {faqs.map((item, index) => {
           const isOpen = openIndex === index;
           return (
@@ -197,18 +194,19 @@ export default function ChoosePlanPage() {
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className="flex w-full items-center justify-between text-left"
               >
-                <h3 className="text-xl font-semibold text-[#062f43]">
+                <h3 className="text-lg sm:text-xl font-semibold text-[#062f43]">
                   {item.q}
                 </h3>
                 <FiChevronDown
-                  className={`text-2xl transition-transform ${
+                  className={`text-xl sm:text-2xl transition-transform ${
                     isOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
-
               {isOpen && (
-                <p className="mt-4 text-gray-600 leading-relaxed">{item.a}</p>
+                <p className="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base">
+                  {item.a}
+                </p>
               )}
             </div>
           );

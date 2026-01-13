@@ -4,7 +4,7 @@ import axios from "axios";
 import { FadeInItem } from "../../components/UI/Animations";
 import RecommendedBooks from "../../components/UI/RecommendedBooks";
 import SuggestedBooks from "@/components/UI/SuggestedBooks";
-import AudioPlayer from "@/components/UI/AudioPlayer";
+import Link from "next/link";
 
 interface Book {
   id: string;
@@ -34,51 +34,67 @@ export default async function ForYou() {
 
   return (
     <>
-      <div className="flex justify-end">
+      <div className="flex justify-end m-1 ml-0 md:ml-52">
         <SearchInput />
       </div>
       <ClientDashboardLayout>
-        <section className="mb-8">
-          <h2 className="text-2xl font-bold mb-4">Selected just for you</h2>
-          {selectedBooks.length === 0 ? (
-            <p className="text-gray-600">No selected books found.</p>
-          ) : (
-            <div className="space-y-4 max-w-[80%]">
-              {selectedBooks.map((book) => (
-                <FadeInItem key="id">
-                  <div
-                    key={book.id}
-                    className="flex gap-4 bg-[#FFF4E0] p-4 m-1 rounded-lg shadow "
-                    style={{ marginLeft: 0 }}
-                  >
-                    <div className="flex-1 text-gray-700">
-                      <p className="text-base">{book.subTitle}</p>
-                    </div>
-                    <span className="w-px h-32 bg-gray-300 self-center" />
-                    <div className="flex-shrink-0 h-28">
-                      <img
-                        src={book.imageLink}
-                        alt={book.title}
-                        className=" h-32 m-3 object-cover rounded-md"
-                      />
-                    </div>
-                    <div className="flex-1 flex flex-col m-3 gap-3">
-                      <h3 className="font-bold text-lg text-gray-700">
-                        {book.title}
-                      </h3>
-                      <p className="text-sm text-gray-700">{book.author}</p>
-                      {book.audioLink && (
-                        <AudioPlayer src={book.audioLink} />
-                      )}
-                    </div>
-                  </div>
-                </FadeInItem>
-              ))}
-            </div>
-          )}
-        </section>
-        <RecommendedBooks />
-        <SuggestedBooks />
+        <div className="ml-0 md:ml-52 px-4 md:px-0">
+          <section className="mb-8">
+            <h2 className="text-2xl font-bold mb-4">Selected just for you</h2>
+            {selectedBooks.length === 0 ? (
+              <p className="text-gray-600">No selected books found.</p>
+            ) : (
+              <div className="space-y-4 max-w-full md:max-w-[80%]">
+                {selectedBooks.map((book) => (
+                  <FadeInItem key={book.id}>
+                    <Link href={`/books/${book.id}`}>
+                      <div className="flex flex-col md:flex-row gap-4 bg-[#FFF4E0] p-4 rounded-lg shadow">
+                        <div className="flex-1 text-gray-700">
+                          <p className="text-base">{book.subTitle}</p>
+                        </div>
+                        <span className="w-full md:w-px h-px md:h-32 bg-gray-300 self-center md:self-auto" />
+                        <div className="flex-shrink-0 h-28">
+                          <img
+                            src={book.imageLink}
+                            alt={book.title}
+                            className="h-32 m-3 object-cover rounded-md"
+                          />
+                        </div>
+                        <div className="flex-1 flex flex-col m-3 gap-3">
+                          <h3 className="font-bold text-lg text-gray-700">
+                            {book.title}
+                          </h3>
+                          <p className="text-sm text-gray-700">{book.author}</p>
+                          <div className="flex items-center gap-3 mt-2 w-40 cursor-pointer">
+                            <div className="relative flex items-center justify-center w-10 h-10 bg-black rounded-full shrink-0 mt-1">
+                              <svg
+                                className="w-6 h-6"
+                                viewBox="0 0 24 24"
+                                fill="white"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <polygon points="5,3 19,12 5,21" />
+                              </svg>
+                            </div>
+                            <div className="text-gray-700 font-semibold text-sm">
+                              <div className="text-gray-700 font-semibold text-sm">
+                                3 mins 23 sec
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </FadeInItem>
+                ))}
+              </div>
+            )}
+          </section>
+          <div className="space-y-8">
+            <RecommendedBooks />
+            <SuggestedBooks />
+          </div>
+        </div>
       </ClientDashboardLayout>
     </>
   );

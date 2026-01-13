@@ -18,12 +18,11 @@ export default function LibraryPage() {
 
   return (
     <>
-      <div className="search__input--wrapper flex justify-end m-1">
+      <div className="hidden md:flex justify-end m-1">
         <SearchInput />
       </div>
       <Sidebar setIsLoginOpen={setIsLoginOpen} />
       <div className="ml-52 my-4">
-        {/* Saved Books */}
         <div className="text-lg font-semibold text-gray-800 mb-2">
           Saved Books
         </div>
