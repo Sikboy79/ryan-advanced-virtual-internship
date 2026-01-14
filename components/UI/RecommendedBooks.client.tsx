@@ -7,19 +7,17 @@ import Image from "next/image";
 import { FadeInItem } from "./Animations";
 import BookTimer from "./BookTimer";
 
-
-
 export default function RecommendedBooksClient({ books }: { books: any[] }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(5);
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1280) setVisible(5); 
-      else if (window.innerWidth >= 1024) setVisible(4); 
-      else if (window.innerWidth >= 768) setVisible(3); 
-      else if (window.innerWidth >= 640) setVisible(2); 
-      else setVisible(1); 
+      if (window.innerWidth >= 1280) setVisible(5);
+      else if (window.innerWidth >= 1024) setVisible(4);
+      else if (window.innerWidth >= 768) setVisible(3);
+      else if (window.innerWidth >= 640) setVisible(2);
+      else setVisible(1);
     };
 
     handleResize();
@@ -30,7 +28,6 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
   const maxIndex = Math.max(0, books.length - visible);
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
-
 
   return (
     <section className="mb-10 max-w-[95%] mx-auto">
@@ -72,14 +69,16 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
                       Premium
                     </span>
                   )}
-                  <Link href={`/books/${book.id}`}>
-                    <Image
-                      src={book.imageLink}
-                      alt={book.title}
-                      width={200}
-                      height={280}
-                      className="rounded-md shadow"
-                    />
+                  <Link href={`/books/${book.id}`} className="block relative">
+                    <div className="relative w-full pb-[140%] rounded-md overflow-hidden shadow">
+                      <Image
+                        src={book.imageLink}
+                        alt={book.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                      />
+                    </div>
                     <h3 className="mt-3 text-sm font-semibold line-clamp-2">
                       {book.title}
                     </h3>

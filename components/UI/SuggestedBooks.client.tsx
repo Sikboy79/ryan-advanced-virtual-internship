@@ -13,11 +13,11 @@ export default function SuggestedBooksClient({ books }: { books: any[] }) {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 1280) setVisible(5); 
-      else if (window.innerWidth >= 1024) setVisible(4); 
-      else if (window.innerWidth >= 768) setVisible(3); 
-      else if (window.innerWidth >= 640) setVisible(2); 
-      else setVisible(1); 
+      if (window.innerWidth >= 1280) setVisible(5);
+      else if (window.innerWidth >= 1024) setVisible(4);
+      else if (window.innerWidth >= 768) setVisible(3);
+      else if (window.innerWidth >= 640) setVisible(2);
+      else setVisible(1);
     };
 
     handleResize();
@@ -68,18 +68,20 @@ export default function SuggestedBooksClient({ books }: { books: any[] }) {
                     Premium
                   </span>
                 )}
-                <Link href={`/books/${book.id}`}>
-                  <Image
-                    src={book.imageLink}
-                    alt={book.title}
-                    width={200}
-                    height={280}
-                    className="rounded-md shadow"
-                  />
+                <Link href={`/books/${book.id}`} className="block relative">
+                  <div className="relative w-full pb-[140%] rounded-md overflow-hidden shadow">
+                    <Image
+                      src={book.imageLink}
+                      alt={book.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, (max-width: 1024px) 25vw, 20vw"
+                    />
+                  </div>
                   <h3 className="mt-3 text-sm font-semibold line-clamp-2">
                     {book.title}
                   </h3>
-                  <p className="text-xs text-gray-500 mt-2">{book.author}</p>
+                  <p className="text-xs text-gray-500">{book.author}</p>
                   <p className="text-xs text-gray-800 mt-2">{book.subTitle}</p>
                   <div className="flex items-center text-gray-400 mt-2 gap-3">
                     <BookTimer audioLink={book.audioLink} />
