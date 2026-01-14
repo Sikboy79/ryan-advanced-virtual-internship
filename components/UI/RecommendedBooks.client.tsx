@@ -7,6 +7,8 @@ import Image from "next/image";
 import { FadeInItem } from "./Animations";
 import BookTimer from "./BookTimer";
 
+
+
 export default function RecommendedBooksClient({ books }: { books: any[] }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(5);
@@ -17,7 +19,7 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
       else if (window.innerWidth >= 1024) setVisible(4); 
       else if (window.innerWidth >= 768) setVisible(3); 
       else if (window.innerWidth >= 640) setVisible(2); 
-      else setVisible(1); // xs
+      else setVisible(1); 
     };
 
     handleResize();
@@ -28,6 +30,7 @@ export default function RecommendedBooksClient({ books }: { books: any[] }) {
   const maxIndex = Math.max(0, books.length - visible);
   const next = () => setIndex((i) => Math.min(i + 1, maxIndex));
   const prev = () => setIndex((i) => Math.max(i - 1, 0));
+
 
   return (
     <section className="mb-10 max-w-[95%] mx-auto">
