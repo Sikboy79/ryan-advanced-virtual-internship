@@ -15,6 +15,9 @@ import {
   FadeColorItem,
 } from "./UI/Animations";
 import Footer from "./footer";
+import HomeSkeleton  from "./UI/HomeSkeleton";
+
+
 
 export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -23,11 +26,19 @@ export default function Home() {
   const setUser = useAuthStore((state) => state.setUser);
   const menuRef = useRef(null);       
   const triggerRef = useRef(null); 
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    const unsubscribe = onAuthChanged(setUser);
-    return () => unsubscribe();
-  }, [setUser]);
+  const unsubscribe = onAuthChanged((user) => {
+    setUser(user);
+    setLoading(false); 
+  });
+
+  return () => unsubscribe();
+}, [setUser]);
+  
+  if (loading) return <HomeSkeleton />;
 
   return (
     <>

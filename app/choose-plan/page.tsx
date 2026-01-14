@@ -1,20 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter, useParams } from "next/navigation";
-import { auth, app, loginAsGuest } from "../library/firebase";
-import { getCheckoutUrl } from "../account/stripePayment";
-import { PlanCard } from "../../components/PlanCard";
 import Image from "next/image";
-import Footer from "@/components/footer";
 import { AiFillFileText } from "react-icons/ai";
 import { GrGrow } from "react-icons/gr";
 import { FaHandshakeSimple } from "react-icons/fa6";
 import { FiChevronDown } from "react-icons/fi";
+import { PlanCard } from "../../components/PlanCard";
+import Footer from "@/components/footer";
+import { auth, app, loginAsGuest } from "../library/firebase";
+import { getCheckoutUrl } from "../account/stripePayment";
 
 export default function ChoosePlanPage() {
-  const params = useParams();
-  const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<"yearly" | "monthly">(
     "yearly"
   );
@@ -42,11 +39,10 @@ export default function ChoosePlanPage() {
     try {
       setLoading(true);
       if (!auth.currentUser) await loginAsGuest();
-
       const checkoutUrl = await getCheckoutUrl(app, prices[selectedPlan].id);
       window.location.href = checkoutUrl;
     } catch (err) {
-      console.error("Checkout error:", err);
+      console.error(err);
       setLoading(false);
     }
   };
@@ -54,32 +50,19 @@ export default function ChoosePlanPage() {
   const faqs = [
     {
       q: "How does the free 7-day trial work?",
-      a: `Begin your complimentary 7-day trial with a Summarist annual
-      membership. You are under no obligation to continue your subscription,
-      and you will only be billed when the trial period expires. With Premium
-      access, you can learn at your own pace and as frequently as you desire,
-      and you may terminate your subscription prior to the conclusion of the
-      7-day free trial.`,
+      a: "Begin your complimentary 7-day trial with a Summarist annual membership...",
     },
     {
-      q: "Can I switch subscriptions from monthly to yearly, or yearly to monthly?",
-      a: `While an annual plan is active, it is not feasible to switch to a
-      monthly plan. However, once the current month ends, transitioning from
-      a monthly plan to an annual plan is an option.`,
+      q: "Can I switch subscriptions from monthly to yearly?",
+      a: "While an annual plan is active, it is not feasible to switch to a monthly plan...",
     },
     {
       q: "What's included in the Premium plan?",
-      a: `Premium membership provides you with the ultimate Summarist
-      experience, including unrestricted entry to many best-selling books,
-      high-quality audio, the ability to download titles for offline reading,
-      and the option to send your reads to your Kindle.`,
+      a: "Premium membership provides you with the ultimate Summarist experience...",
     },
     {
       q: "Can I cancel during my trial or subscription?",
-      a: `You will not be charged if you cancel your trial before its
-      conclusion. While you will not have complete access to the entire
-      Summarist library, you can still expand your knowledge with one curated
-      book per day.`,
+      a: "You will not be charged if you cancel your trial before its conclusion...",
     },
   ];
 
@@ -91,8 +74,48 @@ export default function ChoosePlanPage() {
     selectedPlan === "monthly"
       ? "30-day money back guarantee, no questions asked."
       : "Cancel your trial at any time before it ends, and you won’t be charged.";
+  // Skeleton Component
+  const Skeleton = () => (
+    <div className="animate-pulse">
+      <section className="relative bg-[#062f43] text-white rounded-b-[40%] h-[500px] flex flex-col items-center justify-center">
+        <div className="h-8 w-64 bg-gray-300 rounded mb-4" />
+        <div className="h-4 w-80 bg-gray-300 rounded mb-8" />
+        <div className="h-72 w-72 sm:w-96 sm:h-96 md:w-[420px] md:h-[420px] bg-gray-300 rounded-t-full rounded-b-none" />
+      </section>
+      <div className="plan-features flex flex-wrap justify-center gap-8 py-12 text-center">
+        {Array.from({ length: 3 }).map((_, i) => (
+          <div key={i} className="flex flex-col items-center max-w-xs">
+            <div className="h-12 w-12 bg-gray-300 rounded mb-4" />
+            <div className="h-4 w-40 bg-gray-300 rounded mb-2" />
+            <div className="h-3 w-32 bg-gray-300 rounded" />
+          </div>
+        ))}
+      </div>
+      <div className="min-h-screen bg-white px-4 py-16">
+        <div className="relative w-full max-w-2xl mx-auto space-y-8">
+          <div className="h-8 w-64 bg-gray-300 rounded mx-auto mb-4" />
+          <div className="h-48 w-full bg-gray-300 rounded-lg mb-4" />
+          <div className="h-6 w-16 bg-gray-300 rounded mx-auto mb-4" />
+          <div className="h-48 w-full bg-gray-300 rounded-lg mb-4" />
+          <div className="h-12 w-full bg-gray-300 rounded-lg" />
+        </div>
+      </div>
+      <div className="max-w-4xl mx-auto divide-y border-t border-b mb-10 mt-10 px-4 sm:px-0 space-y-6">
+        {Array.from({ length: 4 }).map((_, i) => (
+          <div key={i} className="py-6">
+            <div className="h-6 w-3/4 bg-gray-300 rounded mb-2" />
+            <div className="h-4 w-full bg-gray-200 rounded" />
+          </div>
+        ))}
+      </div>
 
-  return (
+      <Footer />
+    </div>
+  );
+
+  return loading ? (
+    <Skeleton />
+  ) : (
     <>
       <section className="relative bg-[#062f43] text-white rounded-b-[40%]">
         <div className="max-w-5xl mx-auto px-6 pt-24 pb-20 text-center">

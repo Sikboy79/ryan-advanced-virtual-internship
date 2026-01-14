@@ -6,6 +6,7 @@ import RecommendedBooks from "../../components/UI/RecommendedBooks";
 import SuggestedBooks from "@/components/UI/SuggestedBooks";
 import Link from "next/link";
 
+
 interface Book {
   id: string;
   title: string;
@@ -38,9 +39,10 @@ export default async function ForYou() {
         <SearchInput />
       </div>
       <ClientDashboardLayout>
-        <div className="ml-0 md:ml-52 px-4 md:px-0">
-          <section className="mb-8">
+        <div className="md:ml-52 px-4 md:px-0">
+          <section className="mb-8 md:ml-6">
             <h2 className="text-2xl font-bold mb-4">Selected just for you</h2>
+            
             {selectedBooks.length === 0 ? (
               <p className="text-gray-600">No selected books found.</p>
             ) : (
