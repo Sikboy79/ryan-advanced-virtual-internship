@@ -66,6 +66,7 @@ button:disabled {
 .container {
   padding: 40px 0;
   width: 100%;
+  max-width: 100%;
 }
 
 .btn {
@@ -111,6 +112,7 @@ button:disabled {
   position: relative;
   width: 100%;
   border-bottom: 1px solid #e5e7eb;
+  max-width: 100%;
 }
 
 .nav__wrapper {
@@ -118,6 +120,7 @@ button:disabled {
   justify-content: space-between;
   align-items: center;
   padding: 0 16px;
+  max-width: 100%;
 }
 
 .nav__list--wrapper {
@@ -145,7 +148,7 @@ button:disabled {
   right: 16px;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   padding: 12px 16px;
 }
 
@@ -198,13 +201,19 @@ button:disabled {
 /* ANIMATIONS */
 
 @keyframes colorChange {
-  0% { color: grey; }
-  50% { color: rgb(91, 238, 91); }
-  100% { color: grey; }
+  0% {
+    color: grey;
+  }
+  50% {
+    color: rgb(91, 238, 91);
+  }
+  100% {
+    color: grey;
+  }
 }
 
 .color-animate {
-  animation: colorChange 28s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite;
   animation-delay: 0s;
   font-size: 32px;
   font-weight: 500;
@@ -213,8 +222,8 @@ button:disabled {
 }
 
 .color-animate-1 {
-  animation: colorChange 28s ease-in-out infinite; 
-  animation-delay: 3s; 
+  animation: colorChange 28s ease-in-out infinite;
+  animation-delay: 3s;
   font-size: 32px;
   font-weight: 500;
   color: #6b757b;
@@ -222,7 +231,7 @@ button:disabled {
 }
 
 .color-animate-2 {
-  animation: colorChange 28s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite;
   animation-delay: 6s;
   font-size: 32px;
   font-weight: 500;
@@ -231,7 +240,7 @@ button:disabled {
 }
 
 .color-animate-3 {
-  animation: colorChange 28s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite;
   animation-delay: 9s;
   font-size: 32px;
   font-weight: 500;
@@ -240,7 +249,7 @@ button:disabled {
 }
 
 .color-animate-4 {
-  animation: colorChange 28s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite;
   animation-delay: 12s;
   font-size: 32px;
   font-weight: 500;
@@ -249,7 +258,7 @@ button:disabled {
 }
 
 .color-animate-5 {
-  animation: colorChange 28s ease-in-out infinite; 
+  animation: colorChange 28s ease-in-out infinite;
   animation-delay: 15s;
   font-size: 32px;
   font-weight: 500;

@@ -267,8 +267,8 @@ export default function Home() {
         </div>
       </section>
       <section id="reviews">
-        <div className="row">
-          <div className="container">
+        <div className="container">
+          <div className="row">
             <div className="section__title">What our members say</div>
             <div className="reviews__wrapper">
               <FadeInItem delay="0">

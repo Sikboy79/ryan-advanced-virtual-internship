@@ -1,12 +1,12 @@
 "use client";
 
+import { useState } from "react";
+import { FiClock, FiStar, FiX } from "react-icons/fi";
 import SearchInput from "@/components/UI/SearchInput";
 import Sidebar from "@/components/UI/Sidebar";
 import { useLibraryStore } from "@/store/useMyLibraryStore";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
-import { FiClock, FiStar } from "react-icons/fi";
 
 export default function LibraryPage() {
   const savedBooks = useLibraryStore((state) => state.savedBooks);
@@ -15,14 +15,47 @@ export default function LibraryPage() {
     (state) => state.removeFinishedBook
   );
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   return (
     <>
-      <div className="hidden md:flex justify-end m-1">
+      <div className="flex justify-between items-center md:hidden p-4 border-b bg-white">
+        <SearchInput />
+        <button
+          onClick={() => setMobileSidebarOpen(true)}
+          className="ml-2 p-2 bg-gray-200 rounded-md hover:bg-gray-300"
+        >
+          ☰
+        </button>
+      </div>
+      <div className="hidden md:flex justify-end p-4 border-b">
         <SearchInput />
       </div>
-      <Sidebar setIsLoginOpen={setIsLoginOpen} />
-      <div className="ml-52 my-4">
+      <div className="hidden md:flex fixed left-0 top-0 h-full">
+        <Sidebar setIsLoginOpen={setIsLoginOpen} />
+      </div>
+      {mobileSidebarOpen && (
+        <div className="fixed inset-0 z-50 flex">
+          <div
+            className="fixed inset-0 bg-black/50"
+            onClick={() => setMobileSidebarOpen(false)}
+          />
+          <div
+            className={`relative w-64 bg-white h-full shadow-lg p-4 transform transition-transform duration-300 ${
+              mobileSidebarOpen ? "translate-x-0" : "-translate-x-full"
+            }`}
+          >
+            <button
+              onClick={() => setMobileSidebarOpen(false)}
+              className="absolute top-4 right-4 p-2 text-gray-600 hover:text-gray-800"
+            >
+              <FiX size={24} />
+            </button>
+            <Sidebar setIsLoginOpen={setIsLoginOpen} />
+          </div>
+        </div>
+      )}
+      <div className="md:ml-52 my-4 px-4">
         <div className="text-lg font-semibold text-gray-800 mb-2">
           Saved Books
         </div>
