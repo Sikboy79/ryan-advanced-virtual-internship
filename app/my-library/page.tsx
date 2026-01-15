@@ -83,6 +83,7 @@ export default function LibraryPage() {
                     alt={book.title}
                     width={300}
                     height={400}
+                    priority
                     className="object-cover"
                   />
                   <div className="p-3">
