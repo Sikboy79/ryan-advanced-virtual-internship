@@ -6,6 +6,7 @@ interface SummaryModalProps {
   onClose: () => void;
   summary: string;
   title: string;
+  isPremium: boolean;
 }
 
 export default function SummaryModal({
@@ -15,20 +16,11 @@ export default function SummaryModal({
   title,
 }: SummaryModalProps) {
   const { subscription, loading } = useSubscription();
-  const hasAccess = !!subscription;
 
   if (!isOpen) return null;
 
-  if (!hasAccess) {
-    return (
-      <div className="p-6 text-center">
-        <h3 className="text-lg font-semibold">Subscribe to read summaries</h3>
-      </div>
-    );
-  }
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50">
       <div className="bg-white w-full max-w-3xl max-h-[80vh] rounded-xl shadow-lg flex flex-col">
         <div className="flex items-center justify-between px-6 py-4 border-b">
           <h2 className="text-lg font-semibold">{title}</h2>
