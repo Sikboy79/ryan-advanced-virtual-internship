@@ -27,7 +27,6 @@ export default async function ForYou() {
       "https://us-central1-summaristt.cloudfunctions.net/getBooks?status=selected"
     );
     selectedBooks = res.data;
-    console.log(res.data);
   } catch (err) {
     console.error("Failed to fetch selected books", err);
   }
@@ -49,7 +48,6 @@ export default async function ForYou() {
                   <FadeInItem key={book.id}>
                     <Link href={`/books/${book.id}`}>
                       <div className="flex flex-col md:flex-row items-center md:items-start gap-4 bg-[#FFF4E0] p-4 rounded-lg shadow">
-                        {/* Subtitle */}
                         <div className="flex-1 text-gray-700">
                           <p className="text-sm md:text-base line-clamp-3">
                             {book.subTitle}
